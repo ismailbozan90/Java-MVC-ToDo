@@ -171,7 +171,7 @@ public class TaskController {
         task.setUser(user);
         taskService.addTask(task);
 
-        redirectAttributes.addFlashAttribute("success", "User created successfully");
+        redirectAttributes.addFlashAttribute("success", "Task created successfully");
         return "redirect:/task/add-task";
 
     }
