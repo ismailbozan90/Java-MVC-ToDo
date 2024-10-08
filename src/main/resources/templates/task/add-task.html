@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <section class="py-3 py-md-5 py-xl-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-5">
+                        <h2 class="display-5 fw-bold text-center">Add Task</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <div class="row gy-5 justify-content-center">
+                        <div class="col-12 col-lg-5">
+                            <form action="#" method="post" th:action="@{/addTask}" th:object="${task}">
+
+                                <div th:if="${success != null}" class="alert alert-success">
+                                    <span th:text="${success}"></span>
+                                </div>
+
+                                <div th:if="${error != null} and !${#fields.hasErrors('*')}" class="alert alert-secondary">
+                                    <ul>
+                                        <li th:each="err : ${error}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+
+                                <div th:if="${#fields.hasErrors('*')}" class="alert alert-secondary">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="row gy-3 overflow-hidden">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control border-0 border-bottom rounded-0"
+                                                   name="title" id="title" placeholder="Title" th:field="*{title}" required>
+                                            <label for="title" class="form-label">Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control border-0 border-bottom rounded-0"
+                                                      name="content" id="content" th:field="*{content}" required></textarea>
+                                            <label for="content" class="form-label">Task</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-grid">
+                                            <button class="btn btn-lg btn-dark rounded-0 fs-6" type="submit">Add Task
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

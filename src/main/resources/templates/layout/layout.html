@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-12/assets/css/login-12.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: black;
+            border-color: black;
+            color: white;
+        }
+
+        .pagination .page-link {
+            color: black;
+        }
+
+        .pagination .page-link:hover {
+            color: white;
+            background-color: gray;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<header class="p-3 text-bg-dark" th:if="${page != 'login' and page != 'register'}">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" th:href="@{/}" th:classappend="${page == 'home'} ? 'text-secondary' : 'text-white'" class="nav-link px-2">Home</a></li>
+                <li><a href="#" th:href="@{/task/add-task}" th:classappend="${page == 'add-task'} ? 'text-secondary' : 'text-white'" class="nav-link px-2">Add Task</a></li>
+                <li><a href="#" th:href="@{/completed}" th:classappend="${page == 'completed-task'} ? 'text-secondary' : 'text-white'" class="nav-link px-2">Completed Tasks</a></li>
+                <li><a href="#" th:href="@{/ongoing}" th:classappend="${page == 'ongoing-task'} ? 'text-secondary' : 'text-white'" class="nav-link px-2">Ongoing Tasks</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" th:action="@{/search}" method="get">
+                <input type="search" class="form-control form-control-dark text-bg-dark" name="search" placeholder="Search..."
+                       aria-label="Search">
+            </form>
+
+            <div class="text-end">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-outline-light me-2" th:text="${user.username} + ', Logout'">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div layout:fragment="content">
+
+
+</div>
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="bootstrap" viewBox="0 0 118 94">
+        <title>Bootstrap</title>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+    </symbol>
+    <symbol id="github" viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.54 5.47 7.59.4.07.55-.17.55-.38 0-.18-.01-.79-.01-1.42-2.24.49-2.72-1.08-2.72-1.08-.37-.93-.9-1.18-.9-1.18-.73-.5.06-.49.06-.49.81.06 1.24.83 1.24.83.71 1.22 1.86.87 2.31.67.07-.51.28-.87.51-1.07-1.8-.2-3.68-.9-3.68-4.02 0-.89.32-1.62.84-2.2-.09-.2-.37-1.02.08-2.13 0 0 .69-.22 2.26.84a7.86 7.86 0 012.06-.28c.7 0 1.41.09 2.06.28 1.57-1.06 2.26-.84 2.26-.84.45 1.11.17 1.93.08 2.13.52.58.84 1.31.84 2.2 0 3.12-1.88 3.82-3.68 4.02.3.26.55.78.55 1.57 0 1.14-.01 2.06-.01 2.34 0 .21.15.46.55.38A8.001 8.001 0 008 0z"></path>
+    </symbol>
+    <symbol id="linkedin" viewBox="0 0 16 16">
+        <path d="M1.5 0h13C15.328 0 16 .672 16 1.5v13C16 15.328 15.328 16 14.5 16h-13C.672 16 0 15.328 0 14.5v-13C0 .672.672 0 1.5 0zm.667 4.222v7.556H1.5V4.222h.667zm3.666 7.556h-2V4.222h2v7.556zM4.5 2.888c-.933 0-1.5.615-1.5 1.464 0 .859.57 1.464 1.5 1.464h.017c.93 0 1.5-.605 1.5-1.464 0-.849-.57-1.464-1.5-1.464H4.5zm8.334 7.556h-2V9.278c0-1.19-.425-2-1.487-2-1.166 0-1.648.841-1.648 2.36v2.14h-2V4.222h2v1.076h.017c.333-.634 1.134-1.151 2.306-1.151 1.688 0 2.971 1.086 2.971 3.409v2.447h.017z"></path>
+    </symbol>
+</svg>
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Ismail Bozan</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="https://github.com/ismailbozan95"><svg class="bi" width="24" height="24"><use xlink:href="#github"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="https://www.linkedin.com/in/ismail-bozan-8a068b110/"><svg class="bi" width="24" height="24"><use xlink:href="#linkedin"></use></svg></a></li>
+        </ul>
+    </footer>
+</div>
+
+</body>
+</html>
